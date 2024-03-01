@@ -6,9 +6,9 @@ import {
   TouchableWithoutFeedback,
   View,
   Image,
+  NativeModules
 } from 'react-native';
 import LottieView from 'lottie-react-native';
-import DeviceInfo from 'react-native-device-info';
 import {useDispatch, useSelector} from 'react-redux';
 import {actions as appStatusActions} from '../../store/app-status';
 import {RootState} from 'typesafe-actions';
@@ -16,6 +16,7 @@ import {StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import ModalAlert from '@components/ModalAlert';
 
+const { NBDeviceInfo } = NativeModules;
 const windowWidth = Dimensions?.get('window')?.width;
 const windowHeight = Dimensions?.get('window')?.height;
 const width = Dimensions?.get('window')?.width ?? 0;
@@ -227,7 +228,7 @@ const ButtonAnimationConnection = React.forwardRef<
                 {
                   // Scale the Tablet component If the window width is greater or less than 799
                   scale:
-                    DeviceInfo.getDeviceType() === 'Tablet'
+                    NBDeviceInfo.getDeviceType() === 'Tablet'
                       ? windowWidth > 799
                         ? 1.55
                         : 1.3
@@ -301,7 +302,7 @@ const styles = StyleSheet.create({
     // If it's a 'Tablet', then determine the marginTop based on windowHeight is 1280 and greater set marginTop to -90, otherwise set it to -65
     // If it's a 'Phone', determine the marginTop based on windowHeight is greater than 610, set marginTop to -45, otherwise set it to -30
     marginTop:
-      DeviceInfo.getDeviceType() === 'Tablet'
+      NBDeviceInfo.getDeviceType() === 'Tablet'
         ? windowHeight > 1279
           ? -90 : -65
         : windowHeight > 610

@@ -1,12 +1,13 @@
 import React from 'react';
-import {Button, Image, Linking, StyleSheet, Text, View} from 'react-native';
+import {Button, Image, Linking, StyleSheet, Text, View, NativeModules} from 'react-native';
 import {RootStackParamList} from '@navigation/RootStackParamList';
 import {StackScreenProps} from '@react-navigation/stack';
 import {colors} from '../../theme';
 import {useFocusEffect} from '@react-navigation/native';
 import {actions as appStatusActions} from '../../store/app-status';
 import {useDispatch} from 'react-redux';
-import DeviceInfo from 'react-native-device-info';
+
+const { DeviceInfo } = NativeModules;
 
 type Props = StackScreenProps<RootStackParamList, 'Home'>;
 

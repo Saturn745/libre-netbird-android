@@ -9,6 +9,7 @@ import {
   Text,
   View,
   Dimensions,
+  NativeModules
 } from 'react-native';
 import {
   createDrawerNavigator,
@@ -19,14 +20,13 @@ import {
 import MainStack from './MainStack';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from 'typesafe-actions';
-import DeviceInfo from 'react-native-device-info';
 import {actions as appStatusActions} from '../../store/app-status';
 import {colors} from '../../theme';
 
 const windowWidth = Dimensions?.get('window').width;
 const windowHeight = Dimensions?.get('window').height;
 const Drawer = createDrawerNavigator();
-var version = DeviceInfo.getVersion();
+const { VERSION } = NativeModules.NBInfo.getConstants();
 
 export default () => {
   const dispatch = useDispatch();
@@ -229,7 +229,7 @@ export const CustomDrawerComp = function (props: DrawerContentComponentProps) {
           <Text style={{alignItems: 'center', marginBottom: 25}}>
             <Text style={styles.items}>Version </Text>
             <Text style={[styles.items, {fontWeight: 'normal'}]}>
-              {version}
+              {VERSION}
             </Text>
           </Text>
         </View>
